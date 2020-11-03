@@ -15,10 +15,10 @@
 
 function constructNote(message, letters) {
 
-  function makeFrequencyCounter(arr) {
+  function makeFrequencyCounter(str) {
     const freqCounter = {};
-    for (let el of arr) {
-      freqCounter[el] = (freqCounter[el] + 1) || 1;
+    for (let char of str) {
+      freqCounter[char] = (freqCounter[char] + 1) || 1;
     }
     return freqCounter;
   }
@@ -26,8 +26,9 @@ function constructNote(message, letters) {
   const messageCounter = makeFrequencyCounter(message);
   const lettersCounter = makeFrequencyCounter(letters);
 
-  for (let key in messageCounter) {
-    if (message[key] > lettersCounter[key]) return false;
+  for (let char in messageCounter) {
+    if (!lettersCounter[char]) return false;
+    if (messageCounter[char] > lettersCounter[char]) return false;
   }
   return true;
 }
